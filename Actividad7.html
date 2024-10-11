@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador de Palabras y Caracteres</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+      text-align: center;
+      background-color: #f0f0f0; /* Color de fondo suave */
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra */
+      padding: 20px;
+    }
+    textarea {
+      width: 80%;
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px; /* Bordes redondeados */
+      border: 1px solid #ccc; /* Borde gris */
+    }
+    .contador {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px; /* Bordes redondeados */
+      background-color: #007bff; /* Color azul */
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s; /* Transición suave */
+    }
+    button:hover {
+      background-color: #0056b3; /* Color azul más oscuro al pasar el ratón */
+    }
+  </style>
+</head>
+<body>
+  <h1>Contador de Palabras y Caracteres</h1>
+  
+  <textarea id="textoInput" placeholder="Escribe o pega tu texto aquí..."></textarea>
+  
+  <div class="contador">
+    <p>Palabras: <span id="contadorPalabras">0</span></p>
+    <p>Caracteres (sin espacios): <span id="contadorCaracteres">0</span></p>
+  </div>
+  
+  <button onclick="limpiarTexto()">Limpiar Texto</button> <!-- Botón para limpiar el texto -->
+
+  <script>
+    // Función para contar palabras y caracteres (sin contar espacios en blanco)
+    function contarTexto() {
+      const texto = document.getElementById("textoInput").value;
+
+      // Contar caracteres excluyendo espacios en blanco
+      const textoSinEspacios = texto.replace(/\s/g, ''); // Eliminar todos los espacios en blanco
+      const contadorCaracteres = textoSinEspacios.length;
+      
+      // Contar palabras
+      const palabras = texto.trim().split(/\s+/).filter(palabra => palabra.length > 0);
+      const contadorPalabras = palabras.length;
+
+      // Actualizar los contadores en la página
+      document.getElementById("contadorPalabras").textContent = contadorPalabras;
+      document.getElementById("contadorCaracteres").textContent = contadorCaracteres;
+    }
+
+    // Función para limpiar el texto
+    function limpiarTexto() {
+      document.getElementById("textoInput").value = ''; // Limpiar el campo de texto
+      contarTexto(); // Actualizar contadores
+    }
+
+    // Escuchar el evento 'input' para contar en tiempo real
+    document.getElementById("textoInput").addEventListener("input", contarTexto);
+  </script>
+</body>
+</html>
+
